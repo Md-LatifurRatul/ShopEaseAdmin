@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_ease_admin/core/app_theme.dart';
 
 class ShopEaseAdminApp extends StatelessWidget {
@@ -6,11 +7,15 @@ class ShopEaseAdminApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: "ShopEase Admin Panel",
+    return MultiBlocProvider(
+      providers: [],
 
-      theme: AppTheme.lightTheme,
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: "ShopEase Admin Panel",
+
+        theme: AppTheme.lightTheme,
+      ),
     );
   }
 }
