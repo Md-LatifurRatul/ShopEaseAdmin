@@ -35,7 +35,7 @@ class _LoginFormState extends State<LoginForm> {
             controller: _emailController,
             decoration: const InputDecoration(
               labelText: 'Email',
-              prefixIcon: Icon(Icons.email),
+              prefixIcon: Icon(Icons.mail),
               border: OutlineInputBorder(),
             ),
             validator:
@@ -80,7 +80,7 @@ class _LoginFormState extends State<LoginForm> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.indigo.shade900,
               ),
-              child: const Text("Login"),
+              child: const Text("Login", style: TextStyle(color: Colors.white)),
             ),
           ),
         ],
