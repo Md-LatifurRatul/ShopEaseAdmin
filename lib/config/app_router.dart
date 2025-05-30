@@ -12,9 +12,10 @@ class AppRouter {
     switch (settings.name) {
       case login:
         return MaterialPageRoute(builder: (_) => const LoginScreen());
-
       case dashboard:
         return MaterialPageRoute(builder: (_) => const DashboardScreen());
+      // case banners:
+      //   return MaterialPageRoute(builder: (_) => const BannerScreen());
 
       default:
         return MaterialPageRoute(
