@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shop_ease_admin/features/views/dashboard/widgets/side_bar_menu.dart';
+import 'package:shop_ease_admin/widgets/side_bar_menu.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
