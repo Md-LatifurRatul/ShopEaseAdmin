@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shop_ease_admin/features/views/auth/screens/login_screen.dart';
+import 'package:shop_ease_admin/features/views/banners/screens/banner_screen.dart';
 import 'package:shop_ease_admin/features/views/dashboard/screens/dashboard_screen.dart';
 
 class AppRouter {
@@ -14,8 +15,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const LoginScreen());
       case dashboard:
         return MaterialPageRoute(builder: (_) => const DashboardScreen());
-      // case banners:
-      //   return MaterialPageRoute(builder: (_) => const BannerScreen());
+      case banners:
+        return MaterialPageRoute(builder: (_) => const BannerScreen());
 
       default:
         return MaterialPageRoute(
