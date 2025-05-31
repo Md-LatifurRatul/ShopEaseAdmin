@@ -77,9 +77,7 @@ class _LoginFormState extends State<LoginForm> {
               onPressed: () {
                 if (_formKey.currentState!.validate()) {}
               },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.indigo.shade900,
-              ),
+
               child: const Text("Login", style: TextStyle(color: Colors.white)),
             ),
           ),
