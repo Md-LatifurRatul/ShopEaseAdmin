@@ -19,5 +19,8 @@ class AppTheme {
       filled: true,
       fillColor: Colors.white,
     ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(backgroundColor: Colors.indigo.shade900),
+    ),
   );
 }

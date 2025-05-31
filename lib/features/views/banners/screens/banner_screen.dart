@@ -101,14 +101,14 @@ class _BannerScreenState extends State<BannerScreen> {
 
           if (_selectedImageBytes != null)
             ClipRRect(
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(10),
               child: Card(
                 elevation: 5,
                 child: Image.memory(
                   _selectedImageBytes!,
 
                   width: double.infinity,
-                  height: 150,
+                  height: 160,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -130,9 +130,6 @@ class _BannerScreenState extends State<BannerScreen> {
                   _uploadBanner();
                 }
               },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.indigo.shade900,
-              ),
               child: const Text(
                 "Upload Banner",
                 style: TextStyle(color: Colors.white),
