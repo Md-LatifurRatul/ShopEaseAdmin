@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shop_ease_admin/features/views/auth/screens/login_screen.dart';
 import 'package:shop_ease_admin/features/views/banners/screens/banner_screen.dart';
 import 'package:shop_ease_admin/features/views/dashboard/screens/dashboard_screen.dart';
+import 'package:shop_ease_admin/features/views/products/screens/product_screen.dart';
 
 class AppRouter {
   static const String login = "/";
@@ -17,7 +18,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const DashboardScreen());
       case banners:
         return MaterialPageRoute(builder: (_) => const BannerScreen());
-
+      case products:
+        return MaterialPageRoute(builder: (_) => const ProductScreen());
       default:
         return MaterialPageRoute(
           builder:
