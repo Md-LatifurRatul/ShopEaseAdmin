@@ -3,6 +3,9 @@ import 'dart:typed_data';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:shop_ease_admin/features/views/products/widgets/header_widget.dart';
+import 'package:shop_ease_admin/widgets/custom_image_card.dart';
+import 'package:shop_ease_admin/widgets/custom_upload_button.dart';
+import 'package:shop_ease_admin/widgets/image_selecting_button.dart';
 import 'package:shop_ease_admin/widgets/side_bar_menu.dart';
 import 'package:shop_ease_admin/widgets/snack_message.dart';
 
@@ -44,6 +47,15 @@ class _ProductScreenState extends State<ProductScreen> {
       SnackMessage.showSnackMessage(context, "Please fill all the fields");
       return;
     }
+
+    setState(() {
+      _nameController.clear();
+      _priceController.clear();
+      _ratingController.clear();
+      _descController.clear();
+      _selectedImage = null;
+    });
+
     // ! Handle API Later
   }
 
@@ -108,48 +120,25 @@ class _ProductScreenState extends State<ProductScreen> {
           _buildTextField(_descController, "Description", maxLines: 3),
 
           const SizedBox(height: 16),
-          if (_selectedImage != null)
-            ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: Card(
-                elevation: 5,
-                child: Image.memory(
-                  _selectedImage!,
-
-                  width: double.infinity,
-                  height: 160,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
+          CustomImageCard(imageBytes: _selectedImage),
           const SizedBox(height: 10),
 
           Row(
             children: [
-              ElevatedButton.icon(
+              ImageSelectingButton(
+                label: "Pick Product Image",
                 onPressed: _pickImage,
-                icon: const Icon(Icons.image),
-                label: const Text("Pick Product Image"),
               ),
+
               const SizedBox(width: 20),
             ],
           ),
 
           const SizedBox(height: 24),
 
-          SizedBox(
-            width: double.infinity,
-            height: 48,
-            child: ElevatedButton(
-              onPressed: _uploadProduct,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.indigo.shade900,
-              ),
-              child: const Text(
-                "Upload Product",
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
+          CustomUploadButton(
+            label: "Upload Product",
+            onPressed: _uploadProduct,
           ),
         ],
       ),
