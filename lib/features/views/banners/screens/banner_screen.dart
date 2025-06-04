@@ -2,7 +2,11 @@ import 'dart:typed_data';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:shop_ease_admin/widgets/custom_image_card.dart';
+import 'package:shop_ease_admin/widgets/custom_upload_button.dart';
+import 'package:shop_ease_admin/widgets/image_selecting_button.dart';
 import 'package:shop_ease_admin/widgets/side_bar_menu.dart';
+import 'package:shop_ease_admin/widgets/snack_message.dart';
 
 class BannerScreen extends StatefulWidget {
   const BannerScreen({super.key});
@@ -31,6 +35,11 @@ class _BannerScreenState extends State<BannerScreen> {
   }
 
   Future<void> _uploadBanner() async {
+    if (_titleController.text.isEmpty || _selectedImageBytes == null) {
+      SnackMessage.showSnackMessage(context, "Please fill all the fields");
+      return;
+    }
+
     // Backend
     setState(() {
       _titleController.clear();
@@ -40,9 +49,6 @@ class _BannerScreenState extends State<BannerScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isFormComplete =
-        _titleController.text.isNotEmpty && _selectedImageBytes != null;
-
     return Scaffold(
       body: Row(
         children: [
@@ -59,7 +65,7 @@ class _BannerScreenState extends State<BannerScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
 
-              children: [_buildHeader(), _buildBannerForm(isFormComplete)],
+              children: [_buildHeader(), _buildBannerForm()],
             ),
           ),
         ],
@@ -80,7 +86,7 @@ class _BannerScreenState extends State<BannerScreen> {
     );
   }
 
-  Widget _buildBannerForm(bool isFormComplete) {
+  Widget _buildBannerForm() {
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Column(
@@ -99,42 +105,21 @@ class _BannerScreenState extends State<BannerScreen> {
           ),
           const SizedBox(height: 20),
 
-          if (_selectedImageBytes != null)
-            ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: Card(
-                elevation: 5,
-                child: Image.memory(
-                  _selectedImageBytes!,
+          CustomImageCard(imageBytes: _selectedImageBytes),
+          const SizedBox(height: 20),
 
-                  width: double.infinity,
-                  height: 160,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-          const SizedBox(height: 20),
-          ElevatedButton.icon(
+          ImageSelectingButton(
+            label: "Choose Image",
             onPressed: _pickBannerImage,
-            icon: const Icon(Icons.image),
-            label: const Text("Choose Image"),
-            style: ElevatedButton.styleFrom(backgroundColor: Colors.tealAccent),
           ),
+
           const SizedBox(height: 20),
-          SizedBox(
-            width: double.infinity,
-            height: 48,
-            child: ElevatedButton(
-              onPressed: () {
-                if (isFormComplete) {
-                  _uploadBanner();
-                }
-              },
-              child: const Text(
-                "Upload Banner",
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
+
+          CustomUploadButton(
+            label: "Upload Banner",
+            onPressed: () {
+              _uploadBanner();
+            },
           ),
         ],
       ),
