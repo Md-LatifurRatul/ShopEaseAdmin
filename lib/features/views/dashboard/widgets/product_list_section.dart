@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop_ease_admin/config/app_router.dart';
 import 'package:shop_ease_admin/widgets/confirm_alert.dart';
 
 class ProductListSection extends StatelessWidget {
@@ -53,7 +54,9 @@ class ProductListSection extends StatelessWidget {
                       children: [
                         IconButton(
                           icon: const Icon(Icons.edit, size: 20),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushNamed(context, AppRouter.editProduct);
+                          },
                         ),
                         IconButton(
                           icon: const Icon(

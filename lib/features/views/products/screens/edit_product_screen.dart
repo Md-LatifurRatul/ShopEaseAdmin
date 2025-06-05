@@ -4,28 +4,47 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:shop_ease_admin/widgets/custom_image_card.dart';
 import 'package:shop_ease_admin/widgets/custom_upload_button.dart';
-import 'package:shop_ease_admin/widgets/header_widget.dart';
 import 'package:shop_ease_admin/widgets/image_selecting_button.dart';
-import 'package:shop_ease_admin/widgets/side_bar_menu.dart';
 import 'package:shop_ease_admin/widgets/snack_message.dart';
 
-class ProductScreen extends StatefulWidget {
-  const ProductScreen({super.key});
+class EditProductScreen extends StatefulWidget {
+  // final String name;
+  // final double price;
+  // final double rating;
+  // final String description;
+  // final Uint8List? image;
+
+  const EditProductScreen({
+    super.key,
+    // required this.name,
+    // required this.price,
+    // required this.rating,
+    // required this.description,
+    // this.image,
+  });
 
   @override
-  State<ProductScreen> createState() => _ProductScreenState();
+  State<EditProductScreen> createState() => _EditProductScreenState();
 }
 
-class _ProductScreenState extends State<ProductScreen> {
-  String currentRoute = "/products";
+class _EditProductScreenState extends State<EditProductScreen> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _priceController = TextEditingController();
   final TextEditingController _ratingController = TextEditingController();
   final TextEditingController _descController = TextEditingController();
+  Uint8List? _selectUpdateImage;
 
-  Uint8List? _selectedImage;
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _nameController.text = widget.name;
+  //   _priceController.text = widget.price.toString();
+  //   _ratingController.text = widget.rating.toString();
+  //   _descController.text = widget.description;
+  //   _selectUpdateImage = widget.image;
+  // }
 
-  Future<void> _pickImage() async {
+  Future<void> _pickUpdateImage() async {
     final result = await FilePicker.platform.pickFiles(
       type: FileType.image,
       withData: true,
@@ -33,17 +52,17 @@ class _ProductScreenState extends State<ProductScreen> {
 
     if (result != null && result.files.single.bytes != null) {
       setState(() {
-        _selectedImage = result.files.single.bytes;
+        _selectUpdateImage = result.files.single.bytes;
       });
     }
   }
 
-  void _uploadProduct() async {
+  void _uploadUpdateProduct() async {
     if (_nameController.text.isEmpty ||
         _priceController.text.isEmpty ||
         _ratingController.text.isEmpty ||
         _descController.text.isEmpty ||
-        _selectedImage == null) {
+        _selectUpdateImage == null) {
       SnackMessage.showSnackMessage(context, "Please fill all the fields");
       return;
     }
@@ -53,7 +72,7 @@ class _ProductScreenState extends State<ProductScreen> {
       _priceController.clear();
       _ratingController.clear();
       _descController.clear();
-      _selectedImage = null;
+      _selectUpdateImage = null;
     });
 
     // ! Handle API Later
@@ -62,28 +81,13 @@ class _ProductScreenState extends State<ProductScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Row(
-        children: [
-          SideBarMenu(
-            selectRoute: currentRoute,
-            onMenuItemSelected: (route) {
-              setState(() {
-                currentRoute = route;
-                Navigator.pushNamed(context, route);
-              });
-            },
-          ),
-
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const HeaderWidget(title: "Manage Products"),
-                _buildProductForm(),
-              ],
-            ),
-          ),
-        ],
+      appBar: AppBar(title: const Text("Edit Product")),
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [_buildProductForm()],
+        ),
       ),
     );
   }
@@ -120,14 +124,14 @@ class _ProductScreenState extends State<ProductScreen> {
           _buildTextField(_descController, "Description", maxLines: 3),
 
           const SizedBox(height: 16),
-          CustomImageCard(imageBytes: _selectedImage),
+          CustomImageCard(imageBytes: _selectUpdateImage),
           const SizedBox(height: 10),
 
           Row(
             children: [
               ImageSelectingButton(
-                label: "Pick Product Image",
-                onPressed: _pickImage,
+                label: "Pick Update Product Image",
+                onPressed: _pickUpdateImage,
               ),
 
               const SizedBox(width: 20),
@@ -137,8 +141,8 @@ class _ProductScreenState extends State<ProductScreen> {
           const SizedBox(height: 24),
 
           CustomUploadButton(
-            label: "Upload Product",
-            onPressed: _uploadProduct,
+            label: "Update Product",
+            onPressed: _uploadUpdateProduct,
           ),
         ],
       ),

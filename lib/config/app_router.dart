@@ -3,6 +3,7 @@ import 'package:shop_ease_admin/features/views/auth/screens/login_screen.dart';
 import 'package:shop_ease_admin/features/views/banners/screens/banner_screen.dart';
 import 'package:shop_ease_admin/features/views/banners/screens/edit_banner_screen.dart';
 import 'package:shop_ease_admin/features/views/dashboard/screens/dashboard_screen.dart';
+import 'package:shop_ease_admin/features/views/products/screens/edit_product_screen.dart';
 import 'package:shop_ease_admin/features/views/products/screens/product_screen.dart';
 
 class AppRouter {
@@ -30,6 +31,19 @@ class AppRouter {
               (_) => EditBannerScreen(
                 // existingTitle: args['title'],
                 // existingImage: args['imageBytes'],
+              ),
+        );
+
+      case editProduct:
+        // final args = settings.arguments as Map<String, dynamic>;
+        return MaterialPageRoute(
+          builder:
+              (_) => EditProductScreen(
+                // name: args['name'],
+                // price: args['price'],
+                // rating: args['rating'],
+                // description: args['description'],
+                // image: args['image'],
               ),
         );
 
