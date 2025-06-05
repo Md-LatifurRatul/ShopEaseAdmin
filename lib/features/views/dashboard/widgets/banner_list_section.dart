@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shop_ease_admin/config/app_router.dart';
+import 'package:shop_ease_admin/widgets/confirm_alert.dart';
 
 class BannerListSection extends StatelessWidget {
   const BannerListSection({super.key});
@@ -59,7 +61,12 @@ class BannerListSection extends StatelessWidget {
                             ),
                             IconButton(
                               icon: const Icon(Icons.edit, size: 20),
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.pushNamed(
+                                  context,
+                                  AppRouter.editBanner,
+                                );
+                              },
                             ),
                             IconButton(
                               icon: const Icon(
@@ -67,7 +74,14 @@ class BannerListSection extends StatelessWidget {
                                 color: Colors.red,
                                 size: 20,
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                ConfirmAlert.showConfirmAlertDialogue(
+                                  context,
+                                  title: "Delete Banner",
+                                  content: 'Are you sure you want to delete?',
+                                  onPressed: () {},
+                                );
+                              },
                             ),
                           ],
                         ),
