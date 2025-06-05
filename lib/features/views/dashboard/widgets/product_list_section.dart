@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop_ease_admin/widgets/confirm_alert.dart';
 
 class ProductListSection extends StatelessWidget {
   const ProductListSection({super.key});
@@ -60,7 +61,14 @@ class ProductListSection extends StatelessWidget {
                             color: Colors.red,
                             size: 20,
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            ConfirmAlert.showConfirmAlertDialogue(
+                              context,
+                              title: "Delete Product",
+                              content: 'Are you sure you want to delete?',
+                              onPressed: () {},
+                            );
+                          },
                         ),
                       ],
                     ),
